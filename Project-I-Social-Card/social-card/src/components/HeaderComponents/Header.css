@@ -17,13 +17,10 @@
 .headerIMG {
   border: 1px solid green;
   width: 30%;
-
-
-
 }
 
 .headerIMG img{
-
+  border-radius: 50%;
   max-width: 100%;
   width: 100%;
 
