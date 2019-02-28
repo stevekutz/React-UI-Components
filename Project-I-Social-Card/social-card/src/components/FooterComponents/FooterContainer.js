@@ -21,29 +21,25 @@ const FooterContainer = () => {
       </div>
 
       <div
-        className = 'footerIMG recycle'
+        className = 'footerIMG sync'
       >
         <img
-          onClick={handleClick}
           src="https://img.icons8.com/ios/50/000000/synchronize.png"
-          alt = 'recycle'
+          alt = 'sync'
         />
-        <div
-          className = "counter">0</div>
       </div>
 
-      <div className = 'footerIMG like'>
+      <div
+        onClick={handleClick}
+        className = 'footerIMG like'>
         <img
           className = 'active'
           src="https://img.icons8.com/ios/50/000000/hearts.png"
           alt = 'like-empty'
         />
 
-        <img
-          className = 'hide'
-          src="https://img.icons8.com/ios/50/000000/hearts-filled.png"
-          alt = 'like-full'
-        />
+
+        <div className = "counter">0</div>
 
 
 
