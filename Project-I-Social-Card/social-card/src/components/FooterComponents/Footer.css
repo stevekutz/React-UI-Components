@@ -14,5 +14,11 @@
 
 .footerIMG img {
   width: 100%;
+  cursor: pointer;
+}
 
+
+.like img .hide {
+  border: 1px solid pink;
+  display: none;
 }
