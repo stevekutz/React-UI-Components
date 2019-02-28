@@ -15,12 +15,11 @@ const HeaderTitle = () => {
           @LambdaSchool
         </span>
         <span className = "title-date">
-           &#160;-&#160;{moment().format('DD MMM').toLowerCase()}
+           &#160;&#8226;&#160;{moment().format('DD MMM').toLowerCase()}
         </span>
         <span className = "title-date">
-           &#160;-&#160;{getTheDate().toLowerCase().split(' ').reverse().join(' ')}
+           &#160;&#8226;&#160;{getTheDate().toLowerCase().split(' ').reverse().join(' ')}
         </span>
-
 
       </h1>
     </div>
