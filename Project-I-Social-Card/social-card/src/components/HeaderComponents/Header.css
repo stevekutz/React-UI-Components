@@ -1,1 +1,60 @@
 /* All styles for your header Components live here */
+
+
+.header-container {
+  border: 2px solid pink;
+  width: 100%;
+
+  display: flex;
+
+
+
+}
+
+
+
+
+.headerIMG {
+  border: 1px solid green;
+  width: 30%;
+
+
+
+}
+
+.headerIMG img{
+
+  max-width: 100%;
+  width: 100%;
+
+}
+
+.title-container {
+  border: 5px solid rebeccapurple;
+  display: flex;
+  width: 90%;
+
+}
+
+
+.title {
+  border: 1px solid red;
+  display: flex;
+  width: 90%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  align-items: baseline;
+}
+
+.title-extra, .title-date {
+  color: grey;
+  font-size: 1rem;
+}
+
+.p_text {
+  border: 1px solid blue;
+  font-size: 1.25rem;
+  width: 100%;
+  text-align: left;
+
+}
