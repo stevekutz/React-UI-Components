@@ -17,6 +17,10 @@ const HeaderTitle = () => {
         <span className = "title-date">
            &#160;-&#160;{moment().format('DD MMM').toLowerCase()}
         </span>
+        <span className = "title-date">
+           &#160;-&#160;{getTheDate().toLowerCase().split(' ').reverse().join(' ')}
+        </span>
+
 
       </h1>
     </div>
