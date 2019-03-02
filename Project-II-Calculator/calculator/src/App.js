@@ -14,12 +14,26 @@ class App extends React.Component {
   }
 
   // add event handlers here
+  changeHandler = event => {
+    console.log("event name", event.target.name);
+    console.log("event value", event.target.value);
+
+    this.setState({ total: event.target.value })
+  };
+
+
+
 
   render() {
     return (
       <div className = 'main-container'>
-        <CalculatorDisplay displayValue = {this.state.total}/>
-        <ButtonContainer />
+        <CalculatorDisplay
+          displayValue = {this.state.total}
+        />
+        <ButtonContainer
+          handlerProp = {this.changeHandler}
+          displayValue = {this.state.total}
+        />
       </div>
     );
   }
