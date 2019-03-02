@@ -5,7 +5,7 @@ import './Button.css';
 
 const ButtonContainer = (props) => {
     console.log('ButtonContainer props in, ', props);
-
+    console.log('displayVal ', );
 
   return (
     <div className = "btn-container">
@@ -15,7 +15,7 @@ const ButtonContainer = (props) => {
       <NumberButton
         buttonStyle = 'num-btn format'
         text = "7"
-        propsPassedThru = {props}
+        handlerProp_changeHandler = {props.handlerProp}
 
       />
       <NumberButton buttonStyle = 'num-btn format'    text = "8"/>
