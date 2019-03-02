@@ -5,8 +5,10 @@
 
 
 .main-container{
-  width: 40%;
-  border: 1px solid red;
+  border: 2px solid darkslategray;
+
+  height: 655px;
+  width: 511px;
   margin: 0 auto;
   font-size: 62.5%;
   font-family: Roboto;

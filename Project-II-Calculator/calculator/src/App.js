@@ -1,7 +1,7 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';  // we have this in index.js
 import './App.css';
 import CalculatorDisplay from './components/DisplayComponents/CalculatorDisplay';
+import ButtonContainer from './components/ButtonComponents/ButtonContainer';
 
 class App extends React.Component {
   constructor() {
@@ -9,26 +9,18 @@ class App extends React.Component {
     this.state = {
       inputs: [],
       display: '',
-      number: 9
+      total: 9
     };
   }
+
+  // add event handlers here
+
   render() {
     return (
       <div className = 'main-container'>
-        <CalculatorDisplay displayValue = {this.state.number}/>
-
-
-
-
-
-
-
+        <CalculatorDisplay displayValue = {this.state.total}/>
+        <ButtonContainer />
       </div>
-
-
-
-
-
     );
   }
 }

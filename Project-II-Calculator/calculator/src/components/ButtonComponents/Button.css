@@ -1,0 +1,71 @@
+.btn-container{
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 0;
+  margin: 0;
+
+  width: 508px;
+
+}
+
+.format {
+  font-size: 3rem;
+  text-align: center;
+  vertical-align: center;
+  cursor: pointer;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.format2 {
+  font-size: 6rem;
+  line-height: 6rem;
+
+}
+
+
+
+.func-btn{
+  border: 1px solid lightgrey;
+  color: white;
+  background-color: firebrick;
+
+  width: 131px;
+  height: 100px;
+
+}
+
+.wide-btn {
+  border: 1px solid lightgrey;
+  color: grey;
+  background: white;
+
+  width: 375px;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+  font-weight: lighter;
+
+}
+
+.zero{
+  color: black;
+  font-weight: bolder;
+}
+
+.num-btn{
+  border: 1px solid lightgrey;
+  color: black;
+  background: white;
+
+  width: 125px;
+  height: 100px;
+
+
+
+}
