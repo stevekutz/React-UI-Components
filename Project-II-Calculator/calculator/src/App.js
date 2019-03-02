@@ -1,24 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';  // we have this in index.js
 import './App.css';
+import CalculatorDisplay from './components/DisplayComponents/CalculatorDisplay';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       inputs: [],
-      display: ''
-
+      display: '',
+      number: 9
     };
   }
   render() {
     return (
       <div className = 'main-container'>
-          <h1>
-            LETS BUILD THIS THING
-
-
-          </h1>
+        <CalculatorDisplay displayValue = {this.state.number}/>
 
 
 
