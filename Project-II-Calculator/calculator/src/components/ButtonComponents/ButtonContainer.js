@@ -11,27 +11,27 @@ const ButtonContainer = (props) => {
 
   return (
     <div className = "btn-container">
-      <ActionButton {...props} buttonStyle = 'wide-btn format'  value = {"clear"} text = "clear"/>
-      <NumberButton  {...props} buttonStyle = 'func-btn format2'  value = {"÷"}  text = "÷"/>
-      <NumberButton {...props}  buttonStyle = 'num-btn format'  value = {7} text = "7"
+      <ActionButton {...props} buttonStyle = 'wide-btn format'  value = {"clear"} />
+      <NumberButton  {...props} buttonStyle = 'func-btn format2'  value = {"÷"} />
+      <NumberButton {...props}  buttonStyle = 'num-btn format'  value = {7}
 
       />
-      <NumberButton {...props} buttonStyle = 'num-btn format'  value = {8}   text = "8"/>
-      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {9}  text = "9"/>
-      <NumberButton  {...props} buttonStyle = 'func-btn format' value = {"×"}   text = "×"/>
+      <NumberButton {...props} buttonStyle = 'num-btn format'  value = {8} />
+      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {9} />
+      <NumberButton  {...props} buttonStyle = 'func-btn format' value = {"×"} />
 
-      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {4}  text = "4"/>
-      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {5}  text = "5"/>
-      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {6}  text = "6"/>
-      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"−"}  text = "−"/>
+      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {4} />
+      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {5} />
+      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {6} />
+      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"−"} />
 
-      <NumberButton  {...props} buttonStyle = 'num-btn format' value = {1}   text = "1"/>
-      <NumberButton  {...props} buttonStyle = 'num-btn format' value = {2}  text = "2"/>
-      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {3}   text = "3"/>
-      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"+"}  text = "+"/>
+      <NumberButton  {...props} buttonStyle = 'num-btn format' value = {1} />
+      <NumberButton  {...props} buttonStyle = 'num-btn format' value = {2} />
+      <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {3} />
+      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"+"} />
 
-      <ActionButton {...props} buttonStyle = 'wide-btn format zero' value = {0}  text = "0"/>
-      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"="}   text = "="/>
+      <ActionButton {...props} buttonStyle = 'wide-btn format zero' value = {0} />
+      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"="} />
 
     </div>
   )

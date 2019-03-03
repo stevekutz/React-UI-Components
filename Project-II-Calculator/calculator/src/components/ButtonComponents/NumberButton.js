@@ -2,9 +2,18 @@ import React from 'react';
 import './Button.css';
 
 const NumberButton = (props) => {
- // console.log(`props in NumberButton ${props.text}`, props);
+  // console.log(`props in NumberButton ${props.text}`, props);
 
-  const {handlerProp, value, buttonStyle} = props;
+   const {handlerProp, value, buttonStyle} = props;
+
+  /*
+         Does the same as
+         {handlerProp} = props.handlerProp
+   */
+
+// DOES NOT WORK !!!!
+// onClick = { () => props.handlerProp_changeHandler}
+// onClick = { () => props.handlerProp}
 
   return (
     <div>
@@ -12,9 +21,8 @@ const NumberButton = (props) => {
         className = {buttonStyle}
         value = {value}
         onClick = {handlerProp}
-
       >
-        {props.text}
+        {value}
       </button>
     </div>
   )
