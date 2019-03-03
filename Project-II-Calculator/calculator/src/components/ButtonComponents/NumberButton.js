@@ -3,16 +3,15 @@ import './Button.css';
 
 const NumberButton = (props) => {
   console.log(`props in NumberButton ${props.text}`, props);
+  
+  const {handlerProp, value, buttonStyle} = props;
 
   return (
     <div>
       <button
-        className = {props.buttonStyle}
-
-
-        onClick = { () => props.handlerProp_changeHandler}
-      value = {props.text}
-     //    name = {props.propsPassedThru.displayValue}
+        className = {buttonStyle}
+        value = {value}
+        onClick = {handlerProp}
 
       >
         {props.text}

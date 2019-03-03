@@ -15,7 +15,8 @@ class App extends React.Component {
 
   // add event handlers here
   changeHandler = event => {
-    console.log("event name", event.target.name);
+//    console.log("event name", event.target.name);
+    event.persist();  // added to see if onClick ever fired
     console.log("event value", event.target.value);
 
     this.setState({ total: event.target.value })
@@ -32,7 +33,8 @@ class App extends React.Component {
         />
         <ButtonContainer
           handlerProp = {this.changeHandler}
-          displayValue = {this.state.total}
+         // displayValue = {this.state.total}
+
         />
       </div>
     );
