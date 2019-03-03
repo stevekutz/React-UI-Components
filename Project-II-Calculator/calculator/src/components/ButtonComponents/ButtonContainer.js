@@ -4,10 +4,7 @@ import ActionButton from './ActionButton';
 import './Button.css';
 
 const ButtonContainer = (props) => {
-    console.log('ButtonContainer props in, ', props);
-
-    // handlerProp_changeHandler = {props.handlerProp}
-    // value = {7}
+   // console.log('ButtonContainer props in, ', props);
 
   return (
     <div className = "btn-container">

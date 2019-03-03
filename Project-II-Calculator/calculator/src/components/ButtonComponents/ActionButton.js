@@ -2,9 +2,9 @@ import React from 'react';
 import './Button.css';
 
 const ActionButton = (props) => {
-  console.log('props in ActionButton', props);
+  // console.log('props in ActionButton', props);
 
-  const {handlerProp,value, buttonStyle} = props;
+  const {handlerProp, value, buttonStyle} = props;
 
   if({value} === 'clear') {
     return (
