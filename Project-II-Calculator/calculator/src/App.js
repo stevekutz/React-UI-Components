@@ -9,18 +9,15 @@ class App extends React.Component {
     this.state = {
       inputs: '',   // change this to string
       display: '',
-      total: '',
-      num1: '',
-      num2: '',
+      indexVal: 1,
       operatorLimit: false,
-      firstCharNeg: false,
-      operator: '',
       cleared: 0,
-      mathObj: {
-        val1: '',
-        val2: '',
-        operatorVal: ''
-      }
+        mathObj: {
+          val1: '',
+          val2: '',
+          operatorVal: '',
+          total: '',
+        }
       };
     };
 
@@ -32,152 +29,93 @@ class App extends React.Component {
     //  let displayArr = this.state.inputs.slice();
       console.log("event value", event.target.value);
 
+      // aliases
       const val = event.target.value;
       const math = this.state.mathObj;
 
-      console.log('this is a number',  !isNaN(val) );
-      console.log('checkOperator says ', this.checkOperator(val) );
-
-      console.log('operatorLimit is ', this.state.operatorLimit);
-
-
-
-
-      let getNumber = (obj, i) => {
-        if( ((obj['val${i}']=== '') && (val === "−") ) ||  (!isNaN(val) ) ) {
-
+      // helper func
+      let getNumber = (obj, i, val) => {
+        if (((obj[`val${i}`] === '') && (val === "−")) || (!isNaN(val))) {
           obj[`val${i}`] += val;
-          console.log('mathObj is ', obj);
-          this.setState({inputs: obj[`val${i}`]});
+          return this.setState({inputs: obj[`val${i}`]});
+        } else if ( this.checkOperator(val)  && !this.state.operatorLimit) {
+            math[`operatorVal`] = val;     // find operator
+            return this.setState({
+              operatorLimit: true,
+              indexVal: 2,
+            });
         }
       };
 
-
-
-
-      if(!this.state.operatorLimit) {
-          getNumber(math, 1)
-      } else if ( this.checkOperator(val) ) {
-
-          console.log('OPERATOR ENTERED');
-          math[`operatorVal`] = val;     // find operator
-          this.setState({ operatorLimit: true});
-
+          // clear & reset state if clear entered
+      if(val === "clear"){
+        this.clearDisplay();
+        // if both inputs provided and equal button selected, do the math
+      } else if(val === "=" && math.val1 !== '' && math.val2 !== '') {
+        this.setState({ inputs: this.doMath(math)});
+        // if operator not set, get first number
+      } else if(val === "=" && math.val1 !== '' && math.val2 !== '') {
+         this.setState({ inputs: this.doMath(math)});
+         // if operator not set, get first number
+      } else if(!this.state.operatorLimit) {
+          getNumber(math, 1, val)
+        // if operator entered, save it to state & set flag so no more can be entered
+      } else if ( this.checkOperator(val)  && !this.state.operatorLimit) {
+            math[`operatorVal`] = val;     // find operator
+            this.setState({ operatorLimit: true});
+        //    operator is set, get second number
       } else if(this.state.operatorLimit) {
-          getNumber(math, 2)
-      } else if (val === "=") {
-          console.log(` equal sign hit before `);   // exception handle if user hit equal in wrong time
+          getNumber(math, 2, val)
       }
-
-
 
   };
 
+    doMath = (math) => {
+      // watch for divide by 0 !!
+      // need to convert to Numbers,
+      // adjust screen for largest numbers?
+
+      console.log('math inside doMath is', math);
+      const a = Number(math.val1);
+      const b = Number(math.val2);
+
+      // helper callback functions
+      let sum = (a,b) => a + (1*b);
+      let sub = (a, b) => a - (1*b);
+      let mult = (a, b) => a * (1*b);
+      let div = (a, b) => a / (1*b);
+      let mathCalc = (a, b, cb) => cb(a,b);
+
+      switch(math.operatorVal) {
+        case "+": return math.total = mathCalc(a, b, sum);
+        case "−": return math.total = mathCalc(a, b, sub);
+        case "×": return math.total = mathCalc(a, b, mult);
+        case "÷": return math.total = mathCalc(a, b, div);
+        default: return '';
+      }
+
+    };
 
     clearDisplay = () => {
       this.setState({
-        inputs: [],
+        inputs: '',
         display: '',
+        total: '',
+        indexVal: 1,
         operatorLimit: false,
-        operator: '',
-        operatorIndex: 0
-      })
+        cleared: 0,
+        mathObj: {
+          val1: '',
+          val2: '',
+          operatorVal: ''
+        }
+      });
     };
-
 
     checkOperator = (value) => {
       return (value === "÷" || value === "×" || value === "−" || value === "+");
     };
 
-
-/*  ***********************************************************
-    // REFACTOR THIS !!!!!!
-   const validValue = (val) => {
-      return ( (this.checkOperator(val)
-                && !this.state.operatorLimit))
-        ||  (!this.checkOperator(val) )
-    };
-
-   const charNegative = (index) => {
-     return (displayArr[index] === "−")
-   };
-
-/*
-    const validValue = (val) => {
-      return (
-                 ( calcStr.length === 0 && val === '-') ||
-                 ( calcStr.length === 0 && !isNaN(val)) ||
-                 (this.checkOperator(val) && !this.state.operatorLimit)
-              );
-    };
-*/
-
-    // test if numeric char using isNaN, if
-    // allow first char to be - & then a subtract symbol and then - - or - op
-    // first char cannot be op except -
-    // char after num1 is allowed to be negative
-/*
-    let calcStr = this.state.inputs.slice();
-
-
-      if(val === "clear" || (calcStr.length === 0  && val === "=")){
-        this.clearDisplay();
-      } else if (val === "="){
-          calcStr = this.state.inputs.slice();
-          const operatorVal = this.state.operator;
-              this.doMath(calcStr, operatorVal);
-      } else if (validValue(val) ){
-          displayArr += val;
-          this.setState({inputs: displayArr});
-      }
-
-      console.log('###### displayArr[displayArr.length -1] ', displayArr[displayArr.length -1]);
-
-    // if an operator, set operatorLimit flag
-    if( displayArr.length > 0 && this.checkOperator(val) && !charNegative(0) )
-      this.setState
-        ({ operatorLimit: true,
-           operator: displayArr[displayArr.length -1]
-        });
-*/
-
-
-
-//  };
-
-
-/*
-  doMath = (str, op) => {
-
-    // read into an array without commas, then split out on operator
-
-  //  let mathArr2 = arr.toString().replace(/,/g, '').split(op);
-    console.log('str in DoMath is ', str);
-    console.log('op in DoMath is ', op);
-
-    let mathArr = str.split(op);
-
-    console.log('mathArr is ', mathArr);
-
-    let num1 = 0;
-    let num2 = 0;
-*/
-
-/*
-    if(mathArr[0].length > 0) {
-      num1 = parseFloat(mathArr[0].replace(/,/g, ''));
-    }
-
-    if(mathArr[1].length > 0 ) {
-      num2 = parseFloat(mathArr[1].replace(/,/g, ''));
-    }
-
-    console.log(num1);
-    console.log(num2);
-*/
- //   this.clearDisplay();
-
-//  };
 
 
   render() {
