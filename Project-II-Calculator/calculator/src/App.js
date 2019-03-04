@@ -8,10 +8,8 @@ class App extends React.Component {
     super();
     this.state = {
       inputs: '',   // change this to string
-      display: '',
       indexVal: 1,
       operatorLimit: false,
-      cleared: 0,
         mathObj: {
           val1: '',
           val2: '',
@@ -35,8 +33,10 @@ class App extends React.Component {
 
       // helper func
       let getNumber = (obj, i, val) => {
-        if (((obj[`val${i}`] === '') && (val === "−")) || (!isNaN(val))) {
+        if (((obj[`val${i}`] === '') && (val === "-")) || (!isNaN(val))) {
           obj[`val${i}`] += val;
+       //   if(obj[`val${i}`] === )
+
           return this.setState({inputs: obj[`val${i}`]});
         } else if ( this.checkOperator(val)  && !this.state.operatorLimit) {
             math[`operatorVal`] = val;     // find operator
@@ -52,22 +52,29 @@ class App extends React.Component {
         this.clearDisplay();
         // if both inputs provided and equal button selected, do the math
       } else if(val === "=" && math.val1 !== '' && math.val2 !== '') {
-        this.setState({ inputs: this.doMath(math)});
-        // if operator not set, get first number
-      } else if(val === "=" && math.val1 !== '' && math.val2 !== '') {
          this.setState({ inputs: this.doMath(math)});
-         // if operator not set, get first number
-      } else if(!this.state.operatorLimit) {
+         // if total provided, set up for new calcs
+      } else if(math.total !== '' && math.val1 !== '' && math.val2 !== '') {
+         // this.clearDisplay();   not right
+
+        // this.setState({ inputs: this.doMath(math)});
+        // if operator not set, get first number
+      }
+
+
+
+
+
+      else if(!this.state.operatorLimit) {
           getNumber(math, 1, val)
-        // if operator entered, save it to state & set flag so no more can be entered
+        // if operator entered, save it to state & set flag so no more operators can be entered
       } else if ( this.checkOperator(val)  && !this.state.operatorLimit) {
             math[`operatorVal`] = val;     // find operator
             this.setState({ operatorLimit: true});
-        //    operator is set, get second number
-      } else if(this.state.operatorLimit) {
+        //    if operator is set, get second number
+      } else if (math.operatorVal !== '') {
           getNumber(math, 2, val)
       }
-
   };
 
     doMath = (math) => {
@@ -79,6 +86,9 @@ class App extends React.Component {
       const a = Number(math.val1);
       const b = Number(math.val2);
 
+      console.log('a is actually a  ', typeof(a));
+
+
       // helper callback functions
       let sum = (a,b) => a + (1*b);
       let sub = (a, b) => a - (1*b);
@@ -86,9 +96,12 @@ class App extends React.Component {
       let div = (a, b) => a / (1*b);
       let mathCalc = (a, b, cb) => cb(a,b);
 
+
+      console.log('TEST   ', sub(-1, -3));
+
       switch(math.operatorVal) {
         case "+": return math.total = mathCalc(a, b, sum);
-        case "−": return math.total = mathCalc(a, b, sub);
+        case "-": return math.total = mathCalc(a, b, sub);
         case "×": return math.total = mathCalc(a, b, mult);
         case "÷": return math.total = mathCalc(a, b, div);
         default: return '';
@@ -99,11 +112,8 @@ class App extends React.Component {
     clearDisplay = () => {
       this.setState({
         inputs: '',
-        display: '',
-        total: '',
         indexVal: 1,
         operatorLimit: false,
-        cleared: 0,
         mathObj: {
           val1: '',
           val2: '',
@@ -113,7 +123,7 @@ class App extends React.Component {
     };
 
     checkOperator = (value) => {
-      return (value === "÷" || value === "×" || value === "−" || value === "+");
+      return (value === "÷" || value === "×" || value === "-" || value === "+");
     };
 
 

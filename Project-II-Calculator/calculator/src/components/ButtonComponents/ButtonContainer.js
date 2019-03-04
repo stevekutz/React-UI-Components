@@ -20,7 +20,7 @@ const ButtonContainer = (props) => {
       <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {4} />
       <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {5} />
       <NumberButton  {...props} buttonStyle = 'num-btn format'  value = {6} />
-      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"−"} />
+      <NumberButton  {...props} buttonStyle = 'func-btn format'  value = {"-"} />
 
       <NumberButton  {...props} buttonStyle = 'num-btn format' value = {1} />
       <NumberButton  {...props} buttonStyle = 'num-btn format' value = {2} />
