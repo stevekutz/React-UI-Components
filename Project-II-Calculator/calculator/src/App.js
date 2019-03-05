@@ -1,23 +1,154 @@
 import React from 'react';
 import './App.css';
+import CalculatorDisplay from './components/DisplayComponents/CalculatorDisplay';
+import ButtonContainer from './components/ButtonComponents/ButtonContainer';
 
-const App = () => {
-  return (
-    <div>
-      <h3>Welcome to React Calculator</h3>
-      <p>
-        We have given you a starter project. You'll want to build out your
-        components in their respective files, remove this code and replace it
-        with the proper components.
-      </p>
-      <p>
-        <strong>
-          Don't forget to `default export` your components and import them here
-          inside of this file in order to make them work.
-        </strong>
-      </p>
-    </div>
-  );
-};
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      inputs: '',   // change this to string
+      indexVal: 1,
+      operatorLimit: false,
+        mathObj: {
+          val1: '',
+          val2: '',
+          operatorVal: '',
+          total: '',
+        }
+      };
+    };
+
+
+  // add event handlers here
+  changeHandler = event => {
+    //    console.log("event name", event.target.name);
+    event.persist();  // added to see if onClick ever fired
+    //  let displayArr = this.state.inputs.slice();
+    console.log("event value", event.target.value);
+
+    
+    // aliases
+    const val = event.target.value;
+    const math = this.state.mathObj;
+
+
+    // helper func
+    let getNumber = (obj, i, val) => {
+      if (((obj[`val${i}`] === '') && (val === "-")) || (!isNaN(val))) {
+        obj[`val${i}`] += val;
+        //   if(obj[`val${i}`] === )
+
+        return this.setState({inputs: obj[`val${i}`]});
+      } else if (this.checkOperator(val) && !this.state.operatorLimit) {
+        math[`operatorVal`] = val;     // find operator
+        return this.setState({
+          operatorLimit: true,
+          indexVal: 2,
+        });
+      }
+    };
+
+    // clear & reset state if clear entered
+    if (val === "clear") {
+      this.clearDisplay();
+      // if both inputs provided and equal button selected, do the math
+    } else if (val === "=" && math.val1 !== '' && math.val2 !== '') {
+      this.setState({inputs: this.doMath(math)});
+      // if total provided, set up for new calcs
+    } else if (math.total !== '' && math.val1 !== '' && math.val2 !== '') {
+
+      this.setState({
+        inputs: val,
+        indexVal: 1,
+        operatorLimit: false,
+        mathObj: {
+          val1: '',
+          val2: '',
+          operatorVal: ''
+        }
+      });
+
+
+
+
+      // this.setState({ inputs: this.doMath(math)});
+      // if operator not set, get first number
+    } else if(!this.state.operatorLimit) {
+          getNumber(math, 1, val);
+        // if operator entered, save it to state & set flag so no more operators can be entered
+      } else if ( this.checkOperator(val)  && !this.state.operatorLimit) {
+            math[`operatorVal`] = val;     // find operator
+            this.setState({ operatorLimit: true});
+        //    if operator is set, get second number
+      } else if (math.operatorVal !== '') {
+          getNumber(math, 2, val)
+      }
+  };
+
+    doMath = (math) => {
+      // watch for divide by 0 !!
+      // need to convert to Numbers,
+      // adjust screen for largest numbers?
+
+      console.log('math inside doMath is', math);
+      const a = Number(math.val1);
+      const b = Number(math.val2);
+
+      console.log('a is actually a  ', typeof(a));
+
+
+      // helper callback functions
+      let sum = (a,b) => a + (1*b);
+      let sub = (a, b) => a - (1*b);
+      let mult = (a, b) => a * (1*b);
+      let div = (a, b) => a / (1*b);
+      let mathCalc = (a, b, cb) => cb(a,b);
+
+
+      console.log('TEST   ', sub(-1, -3));
+
+      switch(math.operatorVal) {
+        case "+": return math.total = mathCalc(a, b, sum);
+        case "-": return math.total = mathCalc(a, b, sub);
+        case "×": return math.total = mathCalc(a, b, mult);
+        case "÷": return math.total = mathCalc(a, b, div);
+        default: return '';
+      }
+
+    };
+
+    clearDisplay = () => {
+      this.setState({
+        inputs: '',
+        indexVal: 1,
+        operatorLimit: false,
+        mathObj: {
+          val1: '',
+          val2: '',
+          operatorVal: ''
+        }
+      });
+    };
+
+    checkOperator = (value) => {
+      return (value === "÷" || value === "×" || value === "-" || value === "+");
+    };
+
+
+
+  render() {
+    return (
+      <div className = 'main-container'>
+        <CalculatorDisplay
+         displayValue = {this.state.inputs}
+        />
+        <ButtonContainer
+          handlerProp = {this.changeHandler}
+        />
+      </div>
+    );
+  }
+}
 
 export default App;
